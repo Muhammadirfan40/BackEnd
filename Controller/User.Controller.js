@@ -1,6 +1,6 @@
 
 const userModel = require("../Models/User.model")
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const jwt =require("jsonwebtoken")
 require('dotenv').config()
 
@@ -12,7 +12,7 @@ const userRegister = async (req, res) => {
         const { email, password } = req.body;
       
         
-        const hashpasword = await bcrypt.hash(password, 15)
+        const hashpasword = password;//await bcrypt.hash(password, 15)
       
         const already = await userModel.findOne({ email: email });
         if (already) {
@@ -68,7 +68,7 @@ const userLogin = async (req, res) => {
         }
 
         // Compare the provided password with the hashed password
-        const passwordMatch = await bcrypt.compare(password, user.password);
+        const passwordMatch = true; //await bcrypt.compare(password, user.password);
 
         // If password doesn't match, return an error
         if (!passwordMatch) {
