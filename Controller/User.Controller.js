@@ -12,7 +12,7 @@ const userRegister = async (req, res) => {
         const { email, password } = req.body;
       
         
-        const hashpasword = password;//await bcrypt.hash(password, 15)
+        const hashpasword = password;//await bcrypt.hash(password, 10)
       
         const already = await userModel.findOne({ email: email });
         if (already) {
@@ -71,7 +71,7 @@ const userLogin = async (req, res) => {
         const passwordMatch = true; //await bcrypt.compare(password, user.password);
 
         // If password doesn't match, return an error
-        if (!passwordMatch) {
+        if (password != user.password) {
             return res.status(200).json({
                 error: true,
                 message: "Incorrect password",
