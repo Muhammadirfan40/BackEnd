@@ -44,18 +44,12 @@ const getAllPatient = async (req, res) => {
 
     try {
 
-
-
-
         const Patients = await PatientModel.find();
         res.status(200).json({
             status: true,
             message: "Patient Register Successfully !",
             Patients: Patients
         })
-
-
-
 
     } catch (error) {
 
@@ -68,6 +62,29 @@ const getAllPatient = async (req, res) => {
     }
 
 };
+
+const getPatientbyid = async (req, res) => {
+    try {
+        const Patient = await PatientModel.findById(req.params.id );
+       
+        
+        res.status(200).json({  
+            status: true,
+            message: "Patient Register Successfully !",
+             Patient
+        })
+
+    } catch (error) {
+
+        res.status(400).json({
+            status: true,
+            message: "patient is not Register",
+            error: error
+        })
+
+    }
+
+}
 
 const EditPatient = async (req, res) => {
 
@@ -123,5 +140,6 @@ module.exports = {
     PatientRegister,
     getAllPatient,
     EditPatient,
-    DeletePatient
+    DeletePatient,
+    getPatientbyid
 };
